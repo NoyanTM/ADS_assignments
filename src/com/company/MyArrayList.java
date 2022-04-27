@@ -142,6 +142,6 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T>  {
 
     @Override
     public String toString() {
-        return "Array elements: "+ Arrays.toString(arr);
+        return " Array elements: "+ Arrays.toString(arr);
     }
 }

@@ -14,10 +14,10 @@ public class MyQueue<T extends Comparable<T>>{
             list.add(item);
             return true;
         } else if(item != null){
-            System.out.println("Null element cannot be added to the Queue.");
+            System.out.println("Null element can't be added to the queue.");
             throw new NullPointerException();
         } else if(list.size()==strict_capacity){
-            System.out.println("No Capacity in the Queue.");
+            System.out.println("No capacity in the queue.");
             throw new IllegalStateException();
         }
         return false;
@@ -28,7 +28,7 @@ public class MyQueue<T extends Comparable<T>>{
             list.add(item);
             return true;
         } else if(item == null){
-            System.out.println("Null element cannot be added to the Queue.");
+            System.out.println("Null element cannot be added to the queue.");
             throw new NullPointerException();
         }
         return false;

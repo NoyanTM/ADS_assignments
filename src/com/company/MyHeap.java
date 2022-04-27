@@ -109,7 +109,7 @@ public class MyHeap<T extends Comparable<T>>{
 
     public void printHeap(){
         System.out.println("");
-        System.out.println("Array of Heap:");
+        System.out.println("Array of heap:");
         System.out.println("");
         for (int i = 0; i < list.size(); i++) {
             System.out.print(list.get(i)+" ");
