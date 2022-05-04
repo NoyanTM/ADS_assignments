@@ -27,4 +27,8 @@ public class MyHashTable <K,V> {
     public boolean isEmpty(){
         return size() == 0;
     }
+	
+	public final int hashCode(K key){
+		return Objects.hashCode(key);
+	}
 }
