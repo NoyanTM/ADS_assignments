@@ -39,4 +39,32 @@ public class MyHashTable <K,V> {
         index = (index < 0) ? index * (-1) : index; // checking index - if index negative, multiplying by (-1)
         return index;
     }
+	
+	// remove() - remove element
+    public V remove (K key){
+        int bucketIndex = getBucketIndex(key);
+        int hashCode = hashCode(key);
+
+        HashNode<K,V> head = bucketArray.get(bucketIndex);
+
+        HashNode<K,V> prev = null; // extra node for connecting prev node with current node
+        while (head != null){
+            if (head.key.equals(key) && hashCode == head.hashCode){
+                break;
+            }
+
+            prev = head;
+            head = head.next;
+        }
+
+        if (head == null){
+            return null;
+        }
+
+        size--;
+
+        if (prev != null) {prev.next = head.next;} // if element is located in the middle
+        else {bucketArray.set(bucketIndex, head.next);} // if element is located at the beginning
+        return head.value;
+    }
 }
