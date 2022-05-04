@@ -67,4 +67,21 @@ public class MyHashTable <K,V> {
         else {bucketArray.set(bucketIndex, head.next);} // if element is located at the beginning
         return head.value;
     }
+	
+	// get() - getting value of element by using key.
+    public V get(K key){
+        int bucketIndex = getBucketIndex(key);
+        int hashCode = hashCode(key);
+
+        HashNode<K,V> head = bucketArray.get(bucketIndex); // starting from the head and getting pointer to the first element inside bucket
+
+        while (head != null){
+            if (head.key.equals(key) && head.hashCode == hashCode) // checking key with hashcode, because keys can be same with other element
+            {return head.value;}
+
+            head = head.next;
+        }
+
+        return null;
+    }
 }
