@@ -27,8 +27,16 @@ public class MyHashTable <K,V> {
     public boolean isEmpty(){
         return size() == 0;
     }
+
+    public final int hashCode(K key){
+        return Objects.hashCode(key);
+    }
 	
-	public final int hashCode(K key){
-		return Objects.hashCode(key);
-	}
+    private int getBucketIndex(K key){
+        int hashCode = hashCode(key);
+        int index = hashCode % numBuckets;
+
+        index = (index < 0) ? index * (-1) : index; // checking index - if index negative, multiplying by (-1)
+        return index;
+    }
 }
