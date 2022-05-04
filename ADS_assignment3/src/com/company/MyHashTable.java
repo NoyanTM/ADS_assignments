@@ -84,4 +84,43 @@ public class MyHashTable <K,V> {
 
         return null;
     }
+	
+	// add() - adding elements
+    public void add(K key, V value){
+        int bucketIndex = getBucketIndex(key);
+        int hashCode = hashCode(key);
+        HashNode<K,V> head = bucketArray.get(bucketIndex);
+
+        while(head != null){
+            if (head.key.equals(key) && head.hashCode == hashCode){
+                head.value = value;
+                return;
+            }
+            head = head.next;
+        }
+
+        size++;
+        head = bucketArray.get(bucketIndex);
+        HashNode<K,V> newNode = new HashNode<K,V>(key, value, hashCode);
+        newNode.next = head;
+        bucketArray.set(bucketIndex, newNode);
+
+        // increasing capacity of array, if 70% of array filled
+        if ((1.0 * size) / numBuckets >= 0.7){
+            ArrayList<HashNode<K,V>> temp = bucketArray;
+            bucketArray = new ArrayList<>();
+            numBuckets = 2 * numBuckets;
+            size = 0;
+            for (int i = 0; i < numBuckets; i++){
+                bucketArray.add(null);
+            }
+
+            for (HashNode<K,V> headNode:temp){
+                while(headNode != null){
+                    add(headNode.key, headNode.value);
+                    headNode = headNode.next;
+                }
+            }
+        }
+    }
 }
