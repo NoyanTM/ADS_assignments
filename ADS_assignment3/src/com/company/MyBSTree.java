@@ -37,4 +37,57 @@ public class MyBSTree {
             inorder(root.right);
         }
     }
+	
+	// search() - searching items
+    public Node search(Node root, int key){
+        if (root == null || root.key == key){
+            return root;
+        }
+
+        if (root.key < key){
+            return search(root.right, key);
+        }
+
+        return search(root.left, key);
+    }
+
+    // deleteNode() - deleting node
+    Node deleteNode(Node root, int k){
+        if (root == null){
+            return root;
+        }
+
+        if (k < root.key){
+            root.left = deleteNode(root.left, k);
+        }
+
+        else if (k > root.key){
+            root.right = deleteNode(root.right, k);
+        }
+
+        else {
+            if (root.left == null){
+                return root.right;
+            }
+
+            else if (root.right == null){
+                return root.left;
+            }
+
+            root.key = minVal(root.right);
+
+            root.right = deleteNode(root.right, root.key);
+        }
+        return root;
+    }
+
+    // minVal() - return min value
+    int minVal(Node root){
+        int minv = root.key;
+        while (root.left != null){
+            minv = root.left.key;
+            root = root.left;
+        }
+        return minv;
+    }
 }
